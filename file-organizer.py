@@ -2,6 +2,7 @@ from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import *
 import datetime
+import random
 import shutil
 import os
 
@@ -74,13 +75,17 @@ class FileOrganizer:
                         shutil.move(self.path + "\\" + path_tree[timestamps.index(i)], date_modified)
                         saved_count += 1
                     except:
-                        duplicate_count += 1
+                        try:
+                            random_modifier = str(random.randint(1, 999))
+                            os.rename(self.path + "\\" + path_tree[timestamps.index(i)], self.path + "\\" + "duplicate" + random_modifier + path_tree[timestamps.index(i)])
+                            shutil.move(self.path + "\\" + "duplicate" + random_modifier + path_tree[timestamps.index(i)], date_modified)
+                            saved_count += 1
+                        except:
+                            duplicate_count += 1
 
             # Delete the directory that the program was called on.
             folder_to_delete = self.path.split('/')
-            print(folder_to_delete)
             folder_to_delete = str(folder_to_delete[len(folder_to_delete)-1])
-            print(folder_to_delete)
             if (folder_to_delete not in folder_names):
                 try:
                     os.rmdir(self.path)
