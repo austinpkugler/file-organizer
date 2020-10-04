@@ -1,2 +1,2 @@
 # file-organizer
-A simple organization app. Files are organized by unix timestamp of date modified.
+A simple organization app for Windows. Files are organized by unix timestamp of date modified.
